@@ -18,21 +18,25 @@ const App = () => {
 
   const nextPerson = () => {
     setIndex((currentIndex) => {
-      const newIndex = currentIndex + 1;
-      if (newIndex > people.length - 1) {
-        return 0;
-      }
+      let newIndex = currentIndex + 1;
+
       return checkNumber(newIndex);
     });
   };
   const prevPerson = () => {
     setIndex((currentIndex) => {
-      const newIndex = currentIndex - 1;
-      if (newIndex < 0) {
-        return people.length - 1;
-      }
+      let newIndex = currentIndex - 1;
+
       return checkNumber(newIndex);
     });
+  };
+
+  const randomPerson = () => {
+    let randomNumber = Math.floor(Math.random() * people.length);
+    if (randomNumber === index) {
+      randomNumber = index + 1;
+    }
+    setIndex(checkNumber(randomNumber));
   };
 
   return (
@@ -56,6 +60,9 @@ const App = () => {
             <FaChevronRight />
           </button>
         </div>
+        <button className="btn btn-hipster" onClick={randomPerson}>
+          Random
+        </button>
       </article>
     </main>
   );
